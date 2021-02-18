@@ -2,7 +2,7 @@ FROM ubuntu AS build
 WORKDIR /src
 
 # Clone the latest source 
-RUN git clone https://github.com/marbellacovino/react-test.git
+# RUN git  -c http.sslVerify=false clone https://github.com/marbellacovino/react-test.git
 # Checkout the master branch --  no action needed as its default branch
 
 RUN npm install
