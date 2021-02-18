@@ -4,11 +4,13 @@ pipeline {
         stage('Cloneing deployments') {
             steps {
               echo 'Cloneing && pulling....'
-              git clone 'https://github.com/marbellacovino/react-test.git'
+            //  git 'https://github.com/marbellacovino/react-test.git'
             }
         }
         stage('Build') {
             steps {
+               sh "npm install"
+               sh "npm run build"
                sh "docker build --no-cache . -t react-test:v.${BUILD_NUMBER}"
                
             }
