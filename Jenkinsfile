@@ -12,7 +12,7 @@ pipeline {
             steps {
                sh "npm install"
                sh "npm run build"
-               sh "docker build --no-cache . -t react-test:v.${BUILD_NUMBER}"
+               sh "docker build --no-cache . -t  marbellacovino/react-test:v.${BUILD_NUMBER}"
                
             }
         }
