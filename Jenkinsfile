@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    tools {nodejs "node"}
     stages {
         stage('Cloneing deployments') {
             steps {
@@ -9,8 +10,6 @@ pipeline {
         }
         stage('Build') {
             steps {
-               sh "npm install"
-               sh "npm run build"
                sh "docker build --no-cache . -t react-test:v.${BUILD_NUMBER}"
                
             }
