@@ -14,15 +14,15 @@ pipeline {
         }
         stage('Build') {
             steps {
-               bat "docker build --no-cache . -t react-test:v.${BUILD_NUMBER}"
+               sh "docker build --no-cache . -t react-test:v.${BUILD_NUMBER}"
                
             }
         }
         stage('Publish') {
                 steps {
                    echo 'Publishing....'
-                   bat "docker tag  marbellacovino/react-test:v.${BUILD_NUMBER} marbellacovino/react-test:v.${BUILD_NUMBER}"
-                   bat "docker push marbellacovino/react-test:v.${BUILD_NUMBER}"
+                   sh "docker tag  marbellacovino/react-test:v.${BUILD_NUMBER} marbellacovino/react-test:v.${BUILD_NUMBER}"
+                   sh "docker push marbellacovino/react-test:v.${BUILD_NUMBER}"
                 }
         }
     }
