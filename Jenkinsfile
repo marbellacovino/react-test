@@ -14,8 +14,9 @@ pipeline {
         }
         stage('Build') {
             steps {
-               sh "docker build --no-cache . -t react-test:v.${BUILD_NUMBER}"
-               
+                node{
+                    sh "docker build --no-cache . -t react-test:v.${BUILD_NUMBER}"  
+                }
             }
         }
         stage('Publish') {
