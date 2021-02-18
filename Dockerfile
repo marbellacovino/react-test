@@ -5,8 +5,8 @@
 # RUN git  -c http.sslVerify=false clone https://github.com/marbellacovino/react-test.git
 # Checkout the master branch --  no action needed as its default branch
 
-RUN npm install
-RUN npm run build
+# RUN npm install
+# RUN npm run build
 
 # stage: 2 — the production environment
 FROM nginx:alpine
