@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:6-alpine' 
-            args '-p 3000:3000' 
-        }
-    }
+    agent any
     stages {
         stage('Cloneing deployments') {
             steps {
@@ -14,9 +9,8 @@ pipeline {
         }
         stage('Build') {
             steps {
-                node{
-                    sh "docker build --no-cache . -t react-test:v.${BUILD_NUMBER}"  
-                }
+               sh "docker build --no-cache . -t react-test:v.${BUILD_NUMBER}"
+               
             }
         }
         stage('Publish') {
