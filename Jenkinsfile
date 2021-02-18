@@ -1,4 +1,8 @@
 pipeline {
+    environment {
+        registry = "marbellacovino/react-test:v."
+        registryCredential = 'dockerhub'
+    }
     agent any
     tools {nodejs "node"}
     stages {
@@ -12,22 +16,24 @@ pipeline {
             steps {
                sh "npm install"
                sh "npm run build"
-              
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                }
             //    sh "docker build --no-cache . -t  marbellacovino/react-test:v.${BUILD_NUMBER}"
                
             }
-             app = docker.build("marbellacovino/react-test:v.") 
         }
         stage('Publish') {
                 steps {
                    echo 'Publishing....'
+                    script {
+                        docker.withRegistry( '', registryCredential ) {
+                            dockerImage.push()
+                        }
+                    }
                 //    sh "docker tag  marbellacovino/react-test:v.${BUILD_NUMBER} marbellacovino/react-test:v.${BUILD_NUMBER}"
                 //    sh "docker push marbellacovino/react-test:v.${BUILD_NUMBER}"
-                }
-                docker.withRegistry('https://registry.hub.docker.com', 'git') {            
-                        app.push("${env.BUILD_NUMBER}")            
-                        app.push("latest")        
-                    } 
+            }
         }
     }
 }
