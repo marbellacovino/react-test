@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        registry = "marbellacovino/react-test:v."
+        registry = "marbellacovino/react-test"
         registryCredential = 'dockerhub'
     }
     agent any
@@ -17,7 +17,7 @@ pipeline {
                sh "npm install"
                sh "npm run build"
                 script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    dockerImage = docker.build registry + ":v.$BUILD_NUMBER"
                 }
             //    sh "docker build --no-cache . -t  marbellacovino/react-test:v.${BUILD_NUMBER}"
                
